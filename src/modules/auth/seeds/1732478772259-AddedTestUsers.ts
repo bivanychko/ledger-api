@@ -1,7 +1,6 @@
 import * as bcrypt from "bcrypt";
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-import { config } from "../../../config";
 import { User } from "../entities/user.entity";
 
 const users = [
@@ -18,10 +17,11 @@ export class AddedTestUsers1732478772259 implements MigrationInterface {
     const promises = [];
 
     for (const user of users) {
-      const encryptedPassword = await bcrypt.hash(user.password, config.SALT_ROUNDS);
+      const salt = await bcrypt.genSalt();
+      const encryptedPassword = await bcrypt.hash(user.password, salt);
       delete user.password;
 
-      promises.push(queryRunner.manager.save(User, { ...user, encryptedPassword }));
+      promises.push(queryRunner.manager.save(User, { ...user, encryptedPassword, salt }));
     }
 
     await Promise.all(promises);

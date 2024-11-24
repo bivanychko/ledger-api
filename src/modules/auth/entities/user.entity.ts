@@ -15,6 +15,9 @@ export class User {
   @Column()
   public encryptedPassword: string;
 
+  @Column()
+  public salt: string;
+
   @Column({ default: false })
   public isLocked: boolean;
 

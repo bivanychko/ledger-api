@@ -1,11 +1,29 @@
-import { Controller, Post } from "@nestjs/common";
+import { Body, Controller, Post, UseFilters, UseGuards, Version } from "@nestjs/common";
+import { ApiHeader, ApiTags } from "@nestjs/swagger";
 
-@Controller("auth")
+import { Headers, Versions } from "../../common/constants";
+import { NotFoundExceptionFilter } from "../../common/filters/not-found.filter";
+import { UnprocessableEntityExceptionFilter } from "../../common/filters/unprocessable-entity.filter";
+import { AuthService } from "./auth.service";
+import { LoginDto } from "./dto/login.dto";
+
+@Controller("/auth")
+@ApiHeader({
+  name: Headers.VERSION,
+  description: "Version of data to retrieve",
+  required: true,
+  schema: {
+    enum: [Versions.V1],
+  },
+})
+@ApiTags("Authorization")
+@UseFilters(UnprocessableEntityExceptionFilter, NotFoundExceptionFilter)
 export class AuthController {
-  constructor() {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post("login")
-  login(): string {
-    return "Logged in";
+  @Version(Versions.V1)
+  login(@Body() dto: LoginDto): Promise<string> {
+    return this.authService.signIn(dto);
   }
 }

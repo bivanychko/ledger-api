@@ -7,10 +7,9 @@ export class EnvVariables {
   @Type(() => Number)
   public APP_PORT: number = 3000;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  @Type(() => Number)
-  public SALT_ROUNDS: number = 10;
+  public JWT_SECRET: string = "test-secret";
 
   @IsString()
   @IsNotEmpty()
