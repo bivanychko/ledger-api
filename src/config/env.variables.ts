@@ -7,6 +7,11 @@ export class EnvVariables {
   @Type(() => Number)
   public APP_PORT: number = 3000;
 
+  @IsNumber()
+  @IsNotEmpty()
+  @Type(() => Number)
+  public SALT_ROUNDS: number = 10;
+
   @IsString()
   @IsNotEmpty()
   public DB_HOST: string = "localhost";
@@ -26,5 +31,5 @@ export class EnvVariables {
 
   @IsString()
   @IsNotEmpty()
-  public DB_NAME: string = "reservation_api";
+  public DB_NAME: string = "ledger_api";
 }
