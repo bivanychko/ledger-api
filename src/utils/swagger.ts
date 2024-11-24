@@ -2,9 +2,7 @@ import { INestApplication } from "@nestjs/common";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
-export function setupSwagger(
-  app: NestExpressApplication | INestApplication,
-): void {
+export function setupSwagger(app: NestExpressApplication | INestApplication): void {
   const swaggerConfig = new DocumentBuilder()
     .setTitle("Swagger")
     .setDescription("The Reservation API description")

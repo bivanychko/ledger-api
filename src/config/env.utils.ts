@@ -18,10 +18,7 @@ export function getEnv(reload = false): Record<string, string | undefined> {
   return config;
 }
 
-export function validateConfig<T>(
-  config: Record<string, unknown>,
-  envDto: ClassConstructor<T>,
-): T {
+export function validateConfig<T>(config: Record<string, unknown>, envDto: ClassConstructor<T>): T {
   const validatedConfig = plainToInstance(envDto, config, {
     exposeDefaultValues: true,
   });
@@ -34,7 +31,7 @@ export function validateConfig<T>(
   if (errors.length > 0) {
     const errMessages: string[] = [];
 
-    errors.forEach((e) => {
+    errors.forEach(e => {
       const errConstraints = e.constraints as { [type: string]: string };
 
       for (const [, errMessage] of Object.entries(errConstraints)) {
@@ -42,9 +39,7 @@ export function validateConfig<T>(
       }
     });
 
-    throw new Error(
-      `Config initialization error: \n${errMessages.join(",\n")}`,
-    );
+    throw new Error(`Config initialization error: \n${errMessages.join(",\n")}`);
   }
 
   return validatedConfig;

@@ -1,8 +1,4 @@
-import {
-  INestApplication,
-  ValidationPipe,
-  VersioningType,
-} from "@nestjs/common";
+import { INestApplication, ValidationPipe, VersioningType } from "@nestjs/common";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import * as compression from "compression";
 import helmet from "helmet";
@@ -16,9 +12,7 @@ import { GlobalFilter } from "../common/filters";
  * @param {NestExpressApplication | INestApplication} app - Nest application instance
  * @param {LoggerService} logger - Logger instance
  */
-export function setGlobalSettings(
-  app: NestExpressApplication | INestApplication,
-): void {
+export function setGlobalSettings(app: NestExpressApplication | INestApplication): void {
   app.enableCors();
 
   app.use(compression());
