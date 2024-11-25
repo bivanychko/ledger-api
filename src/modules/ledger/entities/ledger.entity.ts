@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import { User } from "../../auth/entities/user.entity";
+import { Transaction } from "../../transaction/entities/transaction.entity";
 import { Currency } from "./currency.entity";
 
 @Entity()
@@ -16,4 +17,7 @@ export class Ledger {
 
   @ManyToOne(() => User, { eager: true })
   public user: User;
+
+  @OneToMany(() => Transaction, transaction => transaction.ledger)
+  transactions: Transaction[];
 }

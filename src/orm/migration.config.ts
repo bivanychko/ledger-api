@@ -7,12 +7,20 @@ import { Currency } from "../modules/ledger/entities/currency.entity";
 import { Ledger } from "../modules/ledger/entities/ledger.entity";
 import { AddedCurrency1732490301244 } from "../modules/ledger/migrations/1732490301244-AddedCurrency.migration";
 import { AddedLedger1732494725321 } from "../modules/ledger/migrations/1732494725321-AddedLedger.migration";
+import { Transaction } from "../modules/transaction/entities/transaction.entity";
+import { AddedTransaction1732516066197 } from "../modules/transaction/migrations/1732516066197-AddedTransaction.migration";
 import { getDatabaseConfig } from "./database.config";
 
 const options: DataSourceOptions = {
   type: "postgres",
-  entities: [User, Currency, Ledger],
-  migrations: [AddedUser1732478465988, AddedUserSalt1732488122598, AddedCurrency1732490301244, AddedLedger1732494725321],
+  entities: [User, Currency, Ledger, Transaction],
+  migrations: [
+    AddedUser1732478465988,
+    AddedUserSalt1732488122598,
+    AddedCurrency1732490301244,
+    AddedLedger1732494725321,
+    AddedTransaction1732516066197,
+  ],
   ...getDatabaseConfig(),
 };
 

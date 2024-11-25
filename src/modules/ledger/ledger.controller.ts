@@ -9,7 +9,7 @@ import { AuthGuard } from "../../common/guards/auth.guard";
 import { CreateLedgerDto } from "./dto/create-ledger.dto";
 import { LedgerService } from "./ledger.service";
 
-@Controller("/ledger")
+@Controller("/ledgers")
 @ApiHeader({
   name: Headers.VERSION,
   description: "Version of data to retrieve",

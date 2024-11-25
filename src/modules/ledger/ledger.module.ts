@@ -24,5 +24,6 @@ import { LedgerService } from "./ledger.service";
   ],
   controllers: [LedgerController],
   providers: [LedgerService],
+  exports: [LedgerService],
 })
 export class LedgerModule {}
