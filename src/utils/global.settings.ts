@@ -1,5 +1,5 @@
-import { INestApplication, ValidationPipe, VersioningType, ClassSerializerInterceptor } from "@nestjs/common";
-import { Reflector } from '@nestjs/core';
+import { ClassSerializerInterceptor, INestApplication, ValidationPipe, VersioningType } from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
 import { NestExpressApplication } from "@nestjs/platform-express";
 import * as compression from "compression";
 import helmet from "helmet";
