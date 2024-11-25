@@ -11,9 +11,11 @@ export class Transaction {
   public id: number;
 
   @Column("decimal", { precision: 18, scale: 2 })
+  @Exclude()
   public amount: number;
 
   @Column({ type: "enum", enum: TransactionTypes })
+  @Exclude()
   public type: TransactionTypes;
 
   @CreateDateColumn()
@@ -21,6 +23,7 @@ export class Transaction {
   public createdAt: Date;
 
   @ManyToOne(() => Currency, { eager: true })
+  @Exclude()
   public currency: Currency;
 
   @ManyToOne(() => Ledger, ledger => ledger.transactions, { onDelete: "CASCADE" })

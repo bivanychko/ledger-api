@@ -1,5 +1,5 @@
 import { Body, Controller, Post, UseFilters, Version } from "@nestjs/common";
-import { ApiHeader, ApiTags } from "@nestjs/swagger";
+import { ApiHeader, ApiOkResponse, ApiTags } from "@nestjs/swagger";
 
 import { Headers, Versions } from "../../common/constants";
 import { NotFoundExceptionFilter } from "../../common/filters/not-found.filter";
@@ -22,6 +22,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post("login")
+  @ApiOkResponse()
   @Version(Versions.V1)
   login(@Body() dto: LoginDto): Promise<string> {
     return this.authService.signIn(dto);
