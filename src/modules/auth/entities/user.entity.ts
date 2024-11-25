@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+
+import { Ledger } from "../../ledger/entities/ledger.entity";
 
 @Entity()
 @Unique(["email"])
@@ -23,4 +25,7 @@ export class User {
 
   @CreateDateColumn()
   public createdAt: Date;
+
+  @OneToMany(() => Ledger, ledger => ledger.user)
+  public ledgers: Ledger[];
 }
