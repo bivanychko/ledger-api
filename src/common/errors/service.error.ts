@@ -5,3 +5,5 @@ class ServiceError extends Error {
 }
 
 export class UnprocessableServiceError extends ServiceError {}
+
+export class ForbiddenServiceError extends ServiceError {}

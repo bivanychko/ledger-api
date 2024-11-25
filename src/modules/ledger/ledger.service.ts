@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { UnprocessableServiceError } from "../../common/errors";
+import { ForbiddenServiceError, UnprocessableServiceError } from "../../common/errors";
 import { User } from "../auth/entities/user.entity";
 import { CreateLedgerDto } from "./dto/create-ledger.dto";
 import { Currency } from "./entities/currency.entity";
@@ -38,5 +38,13 @@ export class LedgerService {
     const ledger = this.ledgerRepository.create({ currency, user });
 
     return this.ledgerRepository.save(ledger);
+  }
+
+  async getBalance(ledgerId: number, userId: number): Promise<Ledger> {
+    const ledger = await this.ledgerRepository.findOneOrFail({ where: { id: ledgerId }, relations: { user: true } });
+
+    if (ledger.user.id !== userId) throw new ForbiddenServiceError(`You could check only balance of your own ledger`);
+
+    return ledger;
   }
 }

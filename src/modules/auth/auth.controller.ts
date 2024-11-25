@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseFilters, UseGuards, Version } from "@nestjs/common";
+import { Body, Controller, Post, UseFilters, Version } from "@nestjs/common";
 import { ApiHeader, ApiTags } from "@nestjs/swagger";
 
 import { Headers, Versions } from "../../common/constants";
