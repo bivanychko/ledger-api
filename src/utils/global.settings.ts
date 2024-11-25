@@ -1,4 +1,5 @@
-import { INestApplication, ValidationPipe, VersioningType } from "@nestjs/common";
+import { INestApplication, ValidationPipe, VersioningType, ClassSerializerInterceptor } from "@nestjs/common";
+import { Reflector } from '@nestjs/core';
 import { NestExpressApplication } from "@nestjs/platform-express";
 import * as compression from "compression";
 import helmet from "helmet";
@@ -38,4 +39,6 @@ export function setGlobalSettings(app: NestExpressApplication | INestApplication
   });
 
   app.useGlobalFilters(new GlobalFilter());
+
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 }

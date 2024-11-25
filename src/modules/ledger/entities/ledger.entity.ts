@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Exclude } from 'class-transformer';
 
 import { User } from "../../auth/entities/user.entity";
 import { Transaction } from "../../transaction/entities/transaction.entity";
@@ -15,9 +16,11 @@ export class Ledger {
   @ManyToOne(() => Currency, { eager: true })
   public currency: Currency;
 
+  @Exclude()
   @ManyToOne(() => User, { eager: true })
   public user: User;
 
+  @Exclude()
   @OneToMany(() => Transaction, transaction => transaction.ledger)
   transactions: Transaction[];
 }
