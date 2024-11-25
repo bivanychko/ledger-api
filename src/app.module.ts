@@ -1,4 +1,5 @@
 import { Module } from "@nestjs/common";
+import { ThrottlerModule } from "@nestjs/throttler";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AuthModule } from "./modules/auth/auth.module";
@@ -11,6 +12,12 @@ import { initOrmConfig } from "./orm/orm.config";
     TypeOrmModule.forRootAsync({
       useFactory: initOrmConfig,
     }),
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 1000,
+      },
+    ]),
     AuthModule,
     LedgerModule,
     TransactionModule,

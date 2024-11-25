@@ -44,7 +44,6 @@ export class TransactionService {
         : new Decimal(ledger.balance).add(data.amount);
 
     //TODO: Wrap into transaction using entityManager
-
     await this.ledgerRepository.update({ id: ledger.id }, { balance: Number(newBalance) });
 
     return this.transactionRepository.save(transaction);
