@@ -1,18 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { Currency } from "./currency.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
 import { User } from "../../auth/entities/user.entity";
+import { Currency } from "./currency.entity";
 
 @Entity()
 export class Ledger {
-    @PrimaryGeneratedColumn()
-    public id: number;
+  @PrimaryGeneratedColumn()
+  public id: number;
 
-    @Column("decimal", { precision: 18, scale: 2, default: 0 })
-    public balance: number;
+  @Column("decimal", { precision: 18, scale: 2, default: 0 })
+  public balance: number;
 
-    @ManyToOne(() => Currency, { eager: true })
-    public currency: Currency;
+  @ManyToOne(() => Currency, { eager: true })
+  public currency: Currency;
 
-    @ManyToOne(() => User, { eager: true })
-    public user: User;
+  @ManyToOne(() => User, { eager: true })
+  public user: User;
 }
